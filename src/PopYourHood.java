@@ -96,6 +96,45 @@ public class PopYourHood {
 	////////////////////////////////////////////////////////////////
 	//////////////////////////USER STORY 2//////////////////////////
 	////////////////////////////////////////////////////////////////
+
+	/*
+	 * As a user, I want to be able to ensure that various kinds of inputs are tokenized correctly
+	 * @author Goot449
+	 */
+
+
+	//////////////////////////////////
+	//Scenario 1
+	//////////////////////////////////
+	//Given that I am on the main page
+	//When I type an a function (i.e. puts)
+	//Then I see that it is tokenized correctly
+	@Test
+	public void testFunctionTokenization() {
+		driver.findElement(By.id("code_code")).sendKeys("puts");
+		driver.findElement(By.xpath("//input[@value='Tokenize' and @type='submit']")).click();
+		String codeBlock = driver.findElement(By.xpath("//code")).getText();
+		System.out.print(codeBlock);
+		assertTrue(codeBlock.contains(":on_ident, \"puts\""));
+	}
+
+	//////////////////////////////////
+	//Scenario 2
+	//////////////////////////////////
+	//Given that I am on the main page
+	//When I type an a string to be echoed
+	//Then I see that the string is tokenized correctly
+	@Test
+	public void testStringTokenization() {
+		driver.findElement(By.id("code_code")).sendKeys("puts 'I like Cats'");
+		driver.findElement(By.xpath("//input[@value='Tokenize' and @type='submit']")).click();
+		String codeBlock = driver.findElement(By.xpath("//code")).getText();
+		System.out.print(codeBlock);
+		assertTrue(codeBlock.contains(":on_tstring_content, \"I like Cats\""));
+	}
+
+
+
 	@After
 	public void tearDown() throws Exception{
 		driver.quit();
