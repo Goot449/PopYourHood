@@ -148,6 +148,45 @@ public class PopYourHood {
 		assertTrue(codeBlock.contains(":on_nl, \"\\r\\n\""));
 	}
 
+	////////////////////////////////////////////////////////////////
+	//////////////////////////USER STORY 3//////////////////////////
+	////////////////////////////////////////////////////////////////
+
+	/*
+	 * As a user, I want to be able to ensure that ruby code
+	 * parses correctly, so that I can better understand the compilation process
+	 * @author Goot449
+	 */
+
+	//////////////////////////////////
+	//Scenario 1
+	//////////////////////////////////
+	//Given that I am on the main page
+	//When I type a new line
+	//Then I see that the new line character is tokenized correctly
+	@Test
+	public void testParseInt() {
+		driver.findElement(By.id("code_code")).sendKeys("4");
+		driver.findElement(By.xpath("//input[@value='Parse' and @type='submit']")).click();
+		String codeBlock = driver.findElement(By.xpath("//code")).getText();
+		System.out.print(codeBlock);
+		assertTrue(codeBlock.contains(":@int, \"4\""));
+	}
+
+	//////////////////////////////////
+	//Scenario 2
+	//////////////////////////////////
+	//Given that I am on the main page
+	//When I type a new line
+	//Then I see that the new line character is tokenized correctly
+	@Test
+	public void testParseString() {
+		driver.findElement(By.id("code_code")).sendKeys("\"Poop\"");
+		driver.findElement(By.xpath("//input[@value='Parse' and @type='submit']")).click();
+		String codeBlock = driver.findElement(By.xpath("//code")).getText();
+		System.out.print(codeBlock);
+		assertTrue(codeBlock.contains(":@tstring_content, \"Poop\""));
+	}
 
 
 	@After
