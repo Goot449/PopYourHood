@@ -133,6 +133,21 @@ public class PopYourHood {
 		assertTrue(codeBlock.contains(":on_tstring_content, \"I like Cats\""));
 	}
 
+	//////////////////////////////////
+	//Scenario 3
+	//////////////////////////////////
+	//Given that I am on the main page
+	//When I type a new line
+	//Then I see that the new line character is tokenized correctly
+	@Test
+	public void testNewlineTokenization() {
+		driver.findElement(By.id("code_code")).sendKeys("4+4 \r\n puts 'test'");
+		driver.findElement(By.xpath("//input[@value='Tokenize' and @type='submit']")).click();
+		String codeBlock = driver.findElement(By.xpath("//code")).getText();
+		System.out.print(codeBlock);
+		assertTrue(codeBlock.contains(":on_nl, \"\\r\\n\""));
+	}
+
 
 
 	@After
